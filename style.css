@@ -714,7 +714,12 @@ h1 {
   .menu-btn {
     display: inline-flex;
     position: absolute;
-    left: 58px;
+    left: 0;
+  }
+
+  .brand-logo {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .brand-logo-text {
