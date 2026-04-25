@@ -108,6 +108,37 @@ html::after {
   position: relative;
 }
 
+.brand-logo {
+  position: absolute;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.brand-logo-text {
+  font-size: 1.65rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  font-family: "Lobster", sans-serif;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 10px rgba(78, 225, 210, 0.45),
+    0 0 24px rgba(78, 225, 210, 0.28);
+  transition:
+    transform 0.22s ease,
+    text-shadow 0.22s ease;
+}
+
+.brand-logo:hover .brand-logo-text {
+  transform: translateY(-1px) scale(1.04);
+  text-shadow:
+    0 0 14px rgba(78, 225, 210, 0.65),
+    0 0 28px rgba(78, 225, 210, 0.38);
+}
+
 .site-nav {
   display: flex;
   gap: 0.55rem;
@@ -683,7 +714,11 @@ h1 {
   .menu-btn {
     display: inline-flex;
     position: absolute;
-    left: 0;
+    left: 58px;
+  }
+
+  .brand-logo-text {
+    font-size: 1.4rem;
   }
 
   .site-nav {
