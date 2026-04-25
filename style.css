@@ -17,42 +17,48 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: "Inter", Arial, sans-serif;
+  min-height: 100%;
+  /* Base mesh lives on html so corner glows are not hidden behind body's paint (Chrome) */
   background: radial-gradient(
     circle at top,
     #132340 0%,
     var(--bg) 45%,
     #050a13 100%
   );
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", Arial, sans-serif;
+  background: transparent;
   color: var(--text);
   line-height: 1.6;
   position: relative;
+  z-index: 1;
   overflow-x: hidden;
 }
 
-body::before,
-body::after {
+/* Glow orbs on html: z-index 0 sits above html bg but below body (z-index 1) — works in Chrome + Firefox */
+html::before,
+html::after {
   content: "";
   position: fixed;
-  z-index: -1;
+  z-index: 0;
   width: 38rem;
   height: 38rem;
   border-radius: 50%;
   filter: blur(85px);
   pointer-events: none;
+  will-change: transform;
 }
 
-body::before {
+html::before {
   background: rgba(76, 140, 255, 0.25);
   top: -10rem;
   left: -12rem;
 }
 
-body::after {
+html::after {
   background: rgba(78, 225, 210, 0.18);
   bottom: -14rem;
   right: -13rem;
@@ -235,16 +241,19 @@ h1 {
 }
 
 .hero-traits strong {
-  color: var(--accent);
-  background: linear-gradient(
+  /* Gradient text: Chrome needs transparent fill + webkit clip; solid `color` hides the gradient */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
     90deg,
     var(--accent) 0%,
     #7bf0e3 45%,
     var(--primary) 100%
   );
+  background-size: 100%;
+  background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-weight: 700;
   letter-spacing: 0.2px;
 }
@@ -648,8 +657,8 @@ h1 {
 }
 
 @media (max-width: 900px) {
-  body::before,
-  body::after {
+  html::before,
+  html::after {
     display: none;
   }
 
